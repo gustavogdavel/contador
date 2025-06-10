@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contagem Progressiva</title>
+</head>
+<body>
+  <h1>Tempo desde o início:</h1>
+  <div id="contador"></div>
+
+  <script>
+    // Data de início (formato: 'YYYY-MM-DDTHH:MM:SSZ' em UTC)
+    const dataInicio = new Date("2024-06-10T15:00:00Z");
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diff = agora - dataInicio;
+
+      const segundos = Math.floor(diff / 1000) % 60;
+      const minutos = Math.floor(diff / 1000 / 60) % 60;
+      const horas = Math.floor(diff / 1000 / 60 / 60);
+
+      document.getElementById("contador").textContent = `${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    setInterval(atualizarContador, 1000);
+  </script>
+</body>
+</html>
