@@ -1,28 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Contagem Progressiva</title>
-</head>
-<body>
-  <h1>Tempo desde o início:</h1>
-  <div id="contador"></div>
-
-  <script>
-    // Data de início (formato: 'YYYY-MM-DDTHH:MM:SSZ' em UTC)
-    const dataInicio = new Date("2024-06-10T15:00:00Z");
-
-    function atualizarContador() {
-      const agora = new Date();
-      const diff = agora - dataInicio;
-
-      const segundos = Math.floor(diff / 1000) % 60;
-      const minutos = Math.floor(diff / 1000 / 60) % 60;
-      const horas = Math.floor(diff / 1000 / 60 / 60);
-
-      document.getElementById("contador").textContent = `${horas}h ${minutos}m ${segundos}s`;
+  <meta charset="UTF-8">
+  <title>Nosso Amor 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 50px;
     }
 
-    setInterval(atualizarContador, 1000);
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-top: 40px;
+    }
+
+    .contador {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #d6336c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tempo que eu te amo ❤️</h1>
+  <div id="contadorAmor" class="contador"></div>
+
+  <h2>Tempo desde nosso primeiro beijo 😘</h2>
+  <div id="contadorBeijo" class="contador"></div>
+
+  <h2>Tempo de namoro 💑</h2>
+  <div id="contadorNamoro" class="contador"></div>
+
+  <script>
+    function calcularDiferenca(dataInicio) {
+      const agora = new Date();
+      let anos = agora.getFullYear() - dataInicio.getFullYear();
+      let meses = agora.getMonth() - dataInicio.getMonth();
+      let dias = agora.getDate() - dataInicio.getDate();
+      let horas = agora.getHours() - dataInicio.getHours();
+      let minutos = agora.getMinutes() - dataInicio.getMinutes();
+      let segundos = agora.getSeconds() - dataInicio.getSeconds();
+
+      if (segundos < 0) {
+        segundos += 60;
+        minutos--;
+      }
+
+      if (minutos < 0) {
+        minutos += 60;
+        horas--;
+      }
+
+      if (horas < 0) {
+        horas += 24;
+        dias--;
+      }
+
+      if (dias < 0) {
+        const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
+        dias += ultimoMes.getDate();
+        meses--;
+      }
+
+      if (meses < 0) {
+        meses += 12;
+        anos--;
+      }
+
+      return `${anos} anos, ${meses} meses, ${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    function atualizarContadores() {
+      const inicioAmor = new Date("2022-10-16T01:00:00");
+      const inicioBeijo = new Date("2022-10-16T01:00:00");
+      const inicioNamoro = new Date("2022-12-18T15:00:00");
+
+      document.getElementById("contadorAmor").textContent = calcularDiferenca(inicioAmor);
+      document.getElementById("contadorBeijo").textContent = calcularDiferenca(inicioBeijo);
+      document.getElementById("contadorNamoro").textContent = calcularDiferenca(inicioNamoro);
+    }
+
+    setInterval(atualizarContadores, 1000);
+    atualizarContadores();
   </script>
+
 </body>
 </html>
